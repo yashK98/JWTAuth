@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.route('/').get(getBootcamps);
 router.route('/').post(createBootcamp);
-router.route('/:name').get(getBootcampWithId);
-router.route('/:name').put(updateBootcamp);
-router.route('/:name').delete(deleteBootcamp);
+router.route('/:id').get(getBootcampWithId);
+router.route('/:id').put(updateBootcamp);
+router.route('/:id').delete(deleteBootcamp);
 
 module.exports = router;
