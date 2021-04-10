@@ -17,10 +17,11 @@ app.use(morgan('dev'));
 // Mounting the routers
 app.use('/api/v1/users',users);
 
+// Starting the server
 const PORT = constants.PORT;
 const server = app.listen(PORT, console.log("Running in port 5000"));
 
-// Handled Unhandled promise rejection
+// Event to Stop server incase it fails to connect to DB
 process.on('unhandledRejection',(err,promise)=>{
     console.log("Error: Issue with your DB");
     console.log(err.message);
