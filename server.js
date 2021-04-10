@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const errorHandler = require('./middleware/error');
 var constants = require('./constants/constants');
 
 // Importing Route Files
@@ -16,6 +17,9 @@ app.use(morgan('dev'));
 
 // Mounting the routers
 app.use('/api/v1/users',users);
+
+// Error Handling
+app.use(errorHandler);
 
 // Starting the server
 const PORT = constants.PORT;

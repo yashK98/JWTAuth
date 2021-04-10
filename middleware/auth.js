@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
 const constants = require('../constants/constants');
 const User = require('../models/User');
+const ErrorHandler = require('../utils/ErrorHandler');
 const userModel = require('../models/User');
 
 exports.protect = async(req,res,next) => {
     let token;
+    console.log(req.headers.authorization);
     if(!req.headers.authorization){
-        //res.send(400).json({error: "Not a valid User"});
-        next("Error: Invalid Request");
+        next(new ErrorResponse("Empty Token",404));
     }
 
     token = req.headers.authorization;
@@ -17,7 +18,7 @@ exports.protect = async(req,res,next) => {
         req.user = await userModel.findById(decoded.payload.id);
     }catch(err){
         console.log("Invalid User");
-        next("Error: Invalid User");
+        next(new ErrorResponse("Invalid Token",404));
     }
     next();
 }
