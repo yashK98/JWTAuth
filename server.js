@@ -1,26 +1,23 @@
 const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
-const PORT = 5000;
+var constants = require('./constants/constants');
 
-// Route Files
-const bootcamps = require('./routes/bootcamp');
+// Importing Route Files
+const users = require('./routes/user');
 
-// Connect to Database ...
+// DB connection and Initializing server 
 connectDB();
-
-// Initializing Express Server
 const app = express();
 
-// Body Parser
+// Middleware
 app.use(express.json());
-
-// Logs via Morgan
 app.use(morgan('dev'));
 
-// Mount the routers
-app.use('/api/v1/bootcamps',bootcamps);
+// Mounting the routers
+app.use('/api/v1/users',users);
 
+const PORT = constants.PORT;
 const server = app.listen(PORT, console.log("Running in port 5000"));
 
 // Handled Unhandled promise rejection
